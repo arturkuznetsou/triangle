@@ -1,44 +1,32 @@
 package main
 import (
-	"image"
-	"image/color"
+	i "image"
 	"image/png"
 	"os"
-	"fmt"
+	"math"
 )
-func main () {
 
-	// height = factor * width
-	// factor := 0.86602540378
-	var depth float64
-	fmt.Scan(&depth)
 
-	width := 200
-	height := 100
-
-	upLeft := image.Point{0, 0}
-	lowRight := image.Point{width, height}
-
-	img := image.NewRGBA(image.Rectangle{upLeft, lowRight})
-
-	// Colors are defined by Red, Green, Blue, Alpha uint8 values.
-	cyan := color.RGBA{100, 200, 200, 0xff}
-
-	// Set color for each pixel.
-	for x := 0; x < width; x++ {
-		for y := 0; y < height; y++ {
-		switch {
-		case x < width/2 && y < height/2: // upper left quadrant
-			img.Set(x, y, cyan)
-		case x >= width/2 && y >= height/2: // lower right quadrant
-			img.Set(x, y, color.White)
-		default:
-			// Use zero value.
-		}
-		}
+var img *i.RGBA
+func triangulate (y int, x1 int, x2 int) {
+	if math.Abs(float64(x2 - x1)) > 7 {
 	}
+}
+func setup () {
+}
+func main () {
+	var depth float64
+	depth = 9
+	x := int(math.Pow(2, depth - 1))
+	upLeft := i.Point{0, 0}
+	lowRight := i.Point{x * 8 + 1, x * 8 + 9}
+	img = i.NewRGBA(i.Rectangle{upLeft, lowRight})
 
-	// Encode as PNG.
+	hline(1, x * 8 - 1, x * 8)
+	dline(1, x * 8, x * 8)
+	dline(x * 4, 1, -x * 8)
+
+
 	f, _ := os.Create("image.png")
 	png.Encode(f, img)
 }
