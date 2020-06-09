@@ -4,12 +4,20 @@ import (
 )
 
 
-//function for drawing horizontal lines
+/*
+ * Function for drawing horizontal lines
+ */
 func hline (x1 int, x2 int, y int) {
 	for n := x1; n < x2; n++ {
 			img.Set(n, y, color.Black)
 	}
 }
+/*
+ *
+ * Recursive function for splitting a triangle
+ * into four smaller ones
+ *
+ */
 func triangulate (x1 int, x2 int, y int) {
 	xma := x2 - x1 + 1
 	if xma > 9 {
@@ -22,6 +30,11 @@ func triangulate (x1 int, x2 int, y int) {
 		triangulate(x1 + xma / 4, x2 - xma / 4, y - xma / 2)
 	}
 }
+/*
+ *
+ * Draw sierpinski triangle
+ *
+ */
 func draw () {
 	hline(1, x * 8 - 1, x * 8)
 	dline(1, x * 8, x * 8)
