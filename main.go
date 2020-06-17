@@ -1,7 +1,7 @@
 package main
 import (
 	i "image"
-	"image/png"
+	"image/gif"
 	"image/color"
 	sc "strconv"
 	"os"
@@ -18,9 +18,8 @@ func main () {
 	depth = 6
 	x = int(math.Pow(2, depth - 1))
 
-	col = color.RGBA{255, 255, 255, 0xff}
-	r := 0
-	b := 0
+	r := 255
+	b := 255
 	g := 255
 	for n := 1; n < len(os.Args); n++ {
 		for _, lett := range os.Args[n][1:] {
@@ -48,6 +47,7 @@ func main () {
 
 	draw()
 
-	f, _ := os.Create("image.png")
-	png.Encode(f, img)
+	opts := gif.Options{3, nil, nil}
+	f, _ := os.Create("image.gif")
+	gif.Encode(f, img, &opts)
 }
