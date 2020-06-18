@@ -1,19 +1,24 @@
 package main
-
-
 /*
- * Function for drawing horizontal lines
+ * Draw sierpinski triangle
  */
-func hline (x1 int, x2 int, y int) {
-	for n := x1; n < x2; n++ {
-			img.Set(n, y, col)
-	}
+func draw () {
+	hline(1, x * 8 - 1, x * 8)
+	dline(1, x * 8, x * 8)
+	dline(x * 4, 1, -x * 8)
+	triangulate(1, x * 8, x * 8)
 }
+
+
+
+
+
+
+
+
 /*
- *
  * Recursive function for splitting a triangle
  * into four smaller ones
- *
  */
 func triangulate (x1 int, x2 int, y int) {
 	xma := x2 - x1 + 1
@@ -25,40 +30,6 @@ func triangulate (x1 int, x2 int, y int) {
 		triangulate(x1, x1 + (x2 - x1) / 2, y)
 		triangulate(xa + 1, x2, y)
 		triangulate(x1 + xma / 4, x2 - xma / 4, y - xma / 2)
-	}
-}
-/*
- * Draw sierpinski triangle
- */
-func draw () {
-	hline(1, x * 8 - 1, x * 8)
-	dline(1, x * 8, x * 8)
-	dline(x * 4, 1, -x * 8)
-	triangulate(1, x * 8, x * 8)
-}
-/*
- *
- *
- * Function for drawing diagonal lines.
- * Starts at x, y and moves diagonaly
- * for each integer in height
- * Always goes to the right.
- *
- *
- */
-
-func dline (x int, y int, height int) {
-	add := 1
-	n := 0
-	height += height % 2
-	if height < 0 {
-		add = -1
-	}
-	for n != height {
-		img.Set(x, y - n, col)
-		img.Set(x, y - n - add, col)
-		x += 1;
-		n += 2 * add
 	}
 }
 

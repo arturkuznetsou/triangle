@@ -4,7 +4,6 @@ import (
 	"image/gif"
 	"image/color"
 	sc "strconv"
-	"fmt"
 	"os"
 	"math"
 )
@@ -27,23 +26,26 @@ func main () {
 			switch lett {
 				case 'r':
 					r, _ = sc.Atoi(os.Args[n + 1])
-					n += 1
-					break
 				case 'g':
 					g, _ = sc.Atoi(os.Args[n + 1])
-					n += 1
-					break
 				case 'b':
 					b, _ = sc.Atoi(os.Args[n + 1])
-					n += 1
-					break
 			}
 		}
+		n += 1
 	}
 	col = color.RGBA{uint8(r), uint8(g), uint8(b), 0xff}
 	upLeft := i.Point{0, 0}
 	lowRight := i.Point{x * 8 + 1, x * 8 + 9}
+
+
 	img = i.NewRGBA(i.Rectangle{upLeft, lowRight})
+
+	for z := x * 8 + 1; z >= 0; z-- {
+		for y := x * 8 + 9; y >= 0; y-- {
+			img.Set(z, y, col)
+		}
+	}
 
 	draw()
 
