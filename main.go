@@ -4,6 +4,7 @@ import (
 	"image/gif"
 	"image/color"
 	sc "strconv"
+	"fmt"
 	"os"
 	"math"
 )
@@ -15,7 +16,7 @@ var col color.RGBA
 
 func main () {
 	var depth float64
-	depth = 6
+	depth = 9
 	x = int(math.Pow(2, depth - 1))
 
 	r := 255
@@ -40,14 +41,13 @@ func main () {
 		}
 	}
 	col = color.RGBA{uint8(r), uint8(g), uint8(b), 0xff}
-
 	upLeft := i.Point{0, 0}
 	lowRight := i.Point{x * 8 + 1, x * 8 + 9}
 	img = i.NewRGBA(i.Rectangle{upLeft, lowRight})
 
 	draw()
 
-	opts := gif.Options{3, nil, nil}
+	opts := gif.Options{255, nil, nil}
 	f, _ := os.Create("image.gif")
 	gif.Encode(f, img, &opts)
 }
