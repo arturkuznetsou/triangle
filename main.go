@@ -4,6 +4,7 @@ import (
 	"image/gif"
 	"image/color"
 	sc "strconv"
+	"strings"
 	"os"
 	"math"
 )
@@ -12,29 +13,38 @@ import (
 var img *i.RGBA
 var x int
 var col color.RGBA
+var bgcol color.RGBA
 
 func main () {
-	var depth float64
-	depth = 9
-	x = int(math.Pow(2, depth - 1))
+	depth := 9
 
-	r := 255
-	b := 255
-	g := 255
+	// RGB values of triangle
+	r, g, b := 255, 255, 255
+
+	// RGB values of background
+	rb, gb, bb := 255, 255, 255
+
 	for n := 1; n < len(os.Args); n++ {
-		for _, lett := range os.Args[n][1:] {
-			switch lett {
-				case 'r':
-					r, _ = sc.Atoi(os.Args[n + 1])
-				case 'g':
-					g, _ = sc.Atoi(os.Args[n + 1])
-				case 'b':
-					b, _ = sc.Atoi(os.Args[n + 1])
-			}
+		arg := os.Args[n]
+		switch arg[1]{
+			val := strings.ToLower(os.Args[n + 1])
+			case 't':
+				r =
+			case 'd':
+				depth, _ = sc.Atoi(os.Args[n + 1])
 		}
 		n += 1
 	}
+
+
+
 	col = color.RGBA{uint8(r), uint8(g), uint8(b), 0xff}
+	bgcol = color.RGBA{uint8(rb), uint8(gb), uint8(bb), 0xff}
+
+
+
+
+	x = int(math.Pow(2, float64(depth - 1)))
 	upLeft := i.Point{0, 0}
 	lowRight := i.Point{x * 8 + 1, x * 8 + 9}
 
@@ -43,7 +53,7 @@ func main () {
 
 	for z := x * 8 + 1; z >= 0; z-- {
 		for y := x * 8 + 9; y >= 0; y-- {
-			img.Set(z, y, col)
+			img.Set(z, y, bgcol)
 		}
 	}
 
