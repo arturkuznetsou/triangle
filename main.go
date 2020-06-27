@@ -4,7 +4,6 @@ import (
 	"image/gif"
 	"image/color"
 	sc "strconv"
-	"strings"
 	"os"
 	"math"
 )
@@ -18,18 +17,16 @@ var bgcol color.RGBA
 func main () {
 	depth := 9
 
-	// RGB values of triangle
-	r, g, b := 255, 255, 255
 
 	// RGB values of background
 	rb, gb, bb := 255, 255, 255
 
+	col = ParseHex("#00F")
+
 	for n := 1; n < len(os.Args); n++ {
 		arg := os.Args[n]
 		switch arg[1]{
-			val := strings.ToLower(os.Args[n + 1])
 			case 't':
-				r =
 			case 'd':
 				depth, _ = sc.Atoi(os.Args[n + 1])
 		}
@@ -38,7 +35,6 @@ func main () {
 
 
 
-	col = color.RGBA{uint8(r), uint8(g), uint8(b), 0xff}
 	bgcol = color.RGBA{uint8(rb), uint8(gb), uint8(bb), 0xff}
 
 
