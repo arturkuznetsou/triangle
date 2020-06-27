@@ -14,9 +14,10 @@ var img *i.RGBA
 var x int
 var col color.RGBA
 var bgcol color.RGBA
+var depth int
 
 func main () {
-	depth := 9
+	depth = 9
 
 
 	col = ParseHex("000")

@@ -1,8 +1,12 @@
 package main
+import (
+	"fmt"
+)
 /*
  * Draw sierpinski triangle
  */
 func draw () {
+	fmt.Printf("Generating sierpinski triangle with depth %d...\n", depth)
 	hline(1, x * 8 - 1, x * 8)
 	dline(1, x * 8, x * 8)
 	dline(x * 4, 1, -x * 8)
