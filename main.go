@@ -6,6 +6,7 @@ import (
 	sc "strconv"
 	"os"
 	"math"
+	"log"
 )
 
 
@@ -18,24 +19,28 @@ func main () {
 	depth := 9
 
 
-	// RGB values of background
-	rb, gb, bb := 255, 255, 255
-
-	col = ParseHex("#00F")
+	col = ParseHex("000")
+	bgcol = ParseHex("fff")
 
 	for n := 1; n < len(os.Args); n++ {
 		arg := os.Args[n]
-		switch arg[1]{
-			case 't':
-			case 'd':
-				depth, _ = sc.Atoi(os.Args[n + 1])
+		switch arg{
+		case "color":
+			col = ParseHex(os.Args[n + 1])
+			n += 1
+		case "background":
+			bgcol = ParseHex(os.Args[n + 1])
+			n += 1
+		case "depth":
+			depth, _ = sc.Atoi(os.Args[n + 1])
+			n += 1
+		default:
+			l := log.New(os.Stderr, "", 0)
+			l.Fatalf("Invalid option: '%s'.\nTry 'gensir help' for more information.", arg)
+			n += 1
 		}
-		n += 1
 	}
 
-
-
-	bgcol = color.RGBA{uint8(rb), uint8(gb), uint8(bb), 0xff}
 
 
 
