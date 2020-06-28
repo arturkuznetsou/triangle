@@ -23,23 +23,20 @@ func main () {
 	col = ParseHex("000")
 	bgcol = ParseHex("fff")
 
-	for n := 1; n < len(os.Args); n++ {
+	for n := 1; n < len(os.Args) - 1; n++ {
 		arg := os.Args[n]
 		switch arg{
 		case "color":
 			col = ParseHex(os.Args[n + 1])
-			n += 1
 		case "background":
 			bgcol = ParseHex(os.Args[n + 1])
-			n += 1
 		case "depth":
 			depth, _ = sc.Atoi(os.Args[n + 1])
-			n += 1
 		default:
 			l := log.New(os.Stderr, "", 0)
-			l.Fatalf("Invalid option: '%s'.\nTry 'gensir help' for more information.", arg)
-			n += 1
+			l.Fatalf("Invalid option: '%s'.\n. Valid options are: color [HEX COLOR (WITHOUT #)], background [HEX COLOR (WITHOUT #)], depth [INTEGER].", arg)
 		}
+		n += 1
 	}
 
 
